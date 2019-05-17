@@ -14,7 +14,7 @@ class App extends Component {
     this.state = {
       modal: false,
       buttonLabel: 'Click this button!',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      text: 'If you see this, the Lambda function didn\'t work.'
     };
 
     this.toggle = this.toggle.bind(this);
@@ -22,15 +22,13 @@ class App extends Component {
 
   toggle() {
     request
-      .get('https://www.google.com/images/errors/robot.png', { headers: { 'Access-Control-Allow-Origin' : '*' }})
-      .on('response', function(response) {
-        console.log(response.statusCode)
-        console.log(response.headers['content-type'])
-        console.log(response.body)
+      .get(process.env.REACT_APP_SERVICE_ENDPOINT + '/hello', (error, response, body) => {
+        var json_body = JSON.parse(body)
+        console.log(json_body.message)
 
         this.setState(
             {
-                text: response.body
+                text: json_body.message
             }
         )
       })
@@ -49,16 +47,16 @@ class App extends Component {
         </div>
         <p className="App-intro">
           <Button color="danger" onClick={this.toggle}>{this.state.buttonLabel}</Button>
-            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-              <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-              <ModalBody>
-                {this.state.text}
-              </ModalBody>
-              <ModalFooter>
-                <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-                <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-              </ModalFooter>
-            </Modal>
+          <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+            <ModalHeader toggle={this.toggle}>Lambda Test</ModalHeader>
+            <ModalBody>
+              {this.state.text}
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
+              <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            </ModalFooter>
+					</Modal>
         </p>
       </div>
     );
