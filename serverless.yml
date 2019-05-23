@@ -40,8 +40,9 @@ provider:
 #            - "/*"
 
 # you can define service wide environment variables here
-#  environment:
-#    variable1: value1
+  environment:
+    MESSAGES_TABLE:
+      Ref: MessagesDynamoDBTable
 
 plugins:
   - serverless-stack-output
@@ -66,7 +67,6 @@ custom:
     distributionFolder: client/build
     indexDocument: index.html
     errorDocument: error.html
-#    bucketPolicyFile: resources/bucket_policy.json
 
 # you can add packaging information here
 package:
@@ -142,3 +142,6 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
+
+resources:
+  - ${file(resources/database.yaml)}
