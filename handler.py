@@ -1,8 +1,8 @@
 # Required for the serverless-python-requirements plugin
 try:
-  import unzip_requirements
+    import unzip_requirements
 except ImportError:
-  pass
+    pass
 
 import json
 
