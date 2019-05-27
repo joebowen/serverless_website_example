@@ -1,5 +1,5 @@
 {
-  "HelloLambdaFunctionQualifiedArn": "arn:aws:lambda:us-west-2:500402628989:function:serverless-website-example-prod-prod-hello:10",
+  "HelloLambdaFunctionQualifiedArn": "arn:aws:lambda:us-west-2:500402628989:function:serverless-website-example-prod-prod-hello:18",
   "ServiceEndpoint": "https://dl3v9ffxld.execute-api.us-west-2.amazonaws.com/prod",
   "ServerlessDeploymentBucketName": "serverless-website-examp-serverlessdeploymentbuck-1m9g6yt0bzeha"
 }
